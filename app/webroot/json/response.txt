@@ -1,0 +1,8 @@
+HTTP/1.1 302 Found
+Date: Mon, 30 Sep 2013 09:30:18 GMT
+Server: Apache
+Set-Cookie: CAKEPHP=vausutps5fomupildbu237p7r3; expires=Mon, 30-Sep-2013 13:30:28 GMT; path=/; HttpOnly
+Location: http://poslytics.com:80/login
+Vary: Accept-Encoding,User-Agent
+Content-Length: 0
+Content-Type: text/html; charset=UTF-8

@@ -1,0 +1,35 @@
+{
+	"transaction": [
+	{ 
+	"terminalid":"12345678" , 
+	"merchantinfo":"Name Plc", 
+	"transtype":"purchase", 
+	"timestamp":"09/09/2013 10:48:59", 
+	"pan":"543434xxxxxx4434",
+	"currencycode":"566",
+	"countrycode":"566", 
+	"currencysymbol":"N",
+	"amount":"5,000.00" ,
+	"refno":"2034123" , 
+	"refcode":"43343434344", 
+	"authid":"887676767", 
+	"transactionid":"302/2", 
+	"responsecode":"00", 
+	"responsemessage":"Approved" 
+	},{ 
+	"terminalid":"12345679" , 
+	"merchantinfo":"Mr Owen Surulere", 
+	"transtype":"purchase", 
+	"timestamp":"09/09/2013 10:48:59", 
+	"pan":"443434xxxxxx4434",
+	"currencycode":"566",
+	"countrycode":"566", 
+	"currencysymbol":"N",
+	"amount":"8,000.00" ,
+	"refno":"9034123" , 
+	"refcode":"43343434344", 
+	"authid":"", 
+	"transactionid":"303/2", 
+	"responsecode":"01", 
+	"responsemessage":"Declined" }]
+	}

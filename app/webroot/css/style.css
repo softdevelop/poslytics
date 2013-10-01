@@ -1,0 +1,331 @@
+/*----- Reset -----*/
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, a, address, em, img, strong, dl, dt, dd, ul, li, fieldset, 
+form, label, legend{border:0;font-family:inherit;font-size:13px;margin:0;outline:0;padding:0;}
+:focus{outline:0;}
+ul{list-style:none;}
+/*----- Common -----*/
+body{background-color:#fff;color:#000;font:normal normal 100% Arial, Helvetica, sans-serif;line-height:1.5em}
+input, select, textarea{color:#38444f;font:normal normal 1em Arial, Helvetica, sans-serif;margin:0}
+a:link, a:visited{color:#000;text-decoration:none}
+a:hover{color:#339C72C3A}
+.clear{clear:both}
+.hidden{display: none;}
+.italic{font-style: italic;}
+/*******/ 
+#wrapper{
+    background: url(../img/header.jpg) no-repeat top center, url(../img/header-bg.png) repeat-x; 
+    min-width: 1000px;
+    height: 190px;
+}
+#header{
+    width: 1000px;
+    height: 190px;
+    margin: 0 auto;
+}
+#header #logo{
+    float: left;
+    margin-top: 5px;
+}
+#header #name{
+    float: left;
+    margin: 32px 0 0 20px;
+}
+#header ul{
+    height: 32px;
+    margin-top: 8px;
+    float: left;
+}
+#header ul li{
+    float: left;
+    margin-left: -24px;
+}
+#header ul li span.left{
+    width: 26px;
+    height: 40px;
+    float: left;
+}
+#header ul li a{
+    float: left;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 15px 8px 15px;
+}
+#header ul li span.right{
+    width: 26px;
+    height: 42px;
+    float: left;
+    background: url(../img/menu-right2.png) no-repeat;
+}
+#header ul li:last-child span.right{
+    background: none;
+}
+#header ul li:first-child{
+    margin-right: 20px;
+    margin-left: 0;
+}
+#header ul li:first-child:hover{
+    background: url(../img/home-select.png) 9px 2px no-repeat;
+}
+#header ul li:first-child.selected{
+    background: url(../img/home-select.png) 9px 2px no-repeat !important;
+}
+#header ul li:first-child.selected a{
+    background: none !important;
+}
+#header ul li:first-child:hover a{
+    background: none; 
+}
+#header ul li:hover span.left{
+    background: url(../img/menu-left.png) no-repeat;
+}
+#header ul li:hover a{
+    color: #ffea00;
+    background: url(../img/menu-bg.png) repeat-x;
+}
+#header ul li:hover span.right{
+    background: url(../img/menu-right.png) no-repeat;
+}
+#header ul li.selected span.left{
+    background: url(../img/menu-left.png) no-repeat;
+}
+#header ul li.selected a{
+    color: #ffea00;
+    background: url(../img/menu-bg.png) repeat-x;
+}
+#header ul li.selected span.right{
+    background: url(../img/menu-right.png) no-repeat;
+}
+#header #search{
+    float: right;
+    margin: 15px 0 0 0;
+}
+#header #search input{
+    border: #f3c100 solid 1px;
+    border-radius: 5px;
+    color: #f8dfc2;
+    font-size: 14px;
+    background: url(../img/search.png) no-repeat 95% 3px;
+    background-color: #b76709;
+    width: 190px;
+    height: 16px; 
+    padding: 5px 30px 5px 10px;
+}
+#header #header-top{
+    float: right;
+    padding-top: 10px;
+    position: relative;
+}
+#header #header-top a#login{
+    color: #fff;
+    font-size: 14px;
+    margin-right: 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px #000;
+    background: url(../img/login-icon.png) no-repeat;
+    background-size: 18px;
+    padding-left: 25px;
+}
+#header #header-top a#login:hover{
+    text-decoration: underline;
+}
+#header #form-login{
+    display: none;
+    position: absolute;
+    z-index: 999;
+    right: 5px;
+    top: 40px;
+}
+#header #sdc-form-login{
+    text-align: center;
+    border: #9ea38d solid 1px;
+    border-radius: 3px;
+    background: #e9e9f1;   
+    width: 230px;
+    height: auto;
+    padding-top: 10px;
+}
+#header #sdc-form-login input{
+    background: #fff;
+    padding: 5px;
+    color: #E87F00;
+    border: #d7d7d7 solid 1px;
+    margin: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+#header #sdc-form-login .forgot-password {
+    text-align: left;
+    margin-left: 17px;
+}
+#header #sdc-form-login .forgot-password a{
+    color: #595959;
+    font-size: 13px;
+}
+#header #sdc-form-login .forgot-password a:hover{
+    text-decoration: underline;
+}
+#header #sdc-form-login .remember {
+    text-align: left;
+    margin-left: 15px;
+}
+#header #sdc-form-login .remember .checkbox{
+    width: 25px;
+    float: left;
+}
+#header #sdc-form-login .remember label{
+    font-size: 13px;
+    color: #595959;
+    margin-top: 2px;
+    float: left;
+}
+#header #sdc-form-login input:focus{
+    border: #df9842 solid 1px;
+}
+#header #sdc-form-login input#submit{
+    border-radius:5px;
+    background: #f6be7b; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f6be7b 1%, #d0760b 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#f6be7b), color-stop(100%,#d0760b)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f6be7b 1%,#d0760b 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f6be7b 1%,#d0760b 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f6be7b 1%,#d0760b 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f6be7b 1%,#d0760b 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6be7b', endColorstr='#d0760b',GradientType=0 ); /* IE6-9 */
+    color: #fff;
+    width: 85%;
+    text-align: center;
+    padding: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+#header #sdc-form-login input#submit:hover{
+    background: #d0760b; /* Old browsers */
+    background: -moz-linear-gradient(top,  #d0760b 1%, #f6be7b 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#d0760b), color-stop(100%,#f6be7b)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #d0760b 1%,#f6be7b 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #d0760b 1%,#f6be7b 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #d0760b 1%,#f6be7b 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #d0760b 1%,#f6be7b 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0760b', endColorstr='#f6be7b',GradientType=0 ); /* IE6-9 */
+
+}
+#header #form-login .bg{
+    background: #fff;
+    width: 220px;
+    height: 137px;
+    opacity: 0.6;
+    border: #9ea38d solid 1px;
+    border-radius: 3px;
+    margin-top: -130px;
+    margin-left: -10px;
+    z-index: -999;
+    position: absolute;
+    display: none;
+}
+#header .hello{
+    color: #fff;
+    font-size: 14px;
+    margin-right: 10px;
+    text-shadow: 1px 1px 3px #000;
+    line-height: 20px;
+}
+#header .hello span{
+    font-weight: bold;
+    font-size: 14px; 
+}
+#header .hello a{
+    color: #fff119;
+    font-size: 14px;
+    margin-right: 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px #000;
+}
+#header .hello a:hover{
+    text-decoration: underline;  
+}
+/**/  
+#main{
+    height: auto; 
+    min-height: 425px;
+    width: 1000px;
+    background-color: #fff;
+    margin: 0 auto;
+}
+#footer{
+    background: #e37b00;
+    height: 25px;
+    overflow: hidden;
+    padding: 10px 0;
+}
+.line22{
+    clear: both;
+    height: 6px;
+    background: url(../img/line.png) repeat-x;
+}
+#footer p{
+    margin: 0 auto;
+    width: 1000px; 
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 14px;
+}
+/***/
+.edit2{
+    float: right;
+    color: #235A81 !important;
+    font-size: 16px !important;
+    background: url(../img/edit2.png) no-repeat;
+    padding-left: 25px;
+    padding-top: 2px;
+    margin-top: 18px;
+    height: 25px;
+}
+.edit2:hover{
+    text-decoration: underline;
+}
+.print2{
+    float: right;
+    color: #235A81 !important;
+    font-size: 16px !important;
+    background: url(../img/print.png) no-repeat;
+    padding-left: 25px;
+    padding-top: 2px;
+    margin-top: 18px;
+    height: 25px;
+}
+.print2:hover{
+    text-decoration: underline;
+}
+.add2{
+    float: right;
+    color: #235A81 !important;
+    font-size: 16px !important;
+    background: url(../img/add2.png) no-repeat;
+    padding-left: 25px;
+    padding-top: 1px;
+    margin-top: 18px;
+    height: 25px;
+    margin-bottom: 5px;
+}
+.add2:hover{
+    text-decoration: underline;
+}
+
+/*paging*/
+.paging{margin:10px auto;padding:4px 0;text-align:right;color:#FF6600}
+.paging span{text-align:center;overflow:hidden}
+.paging a{color:#FF6600;border:1px solid #e6e6e6;background-color:#fff}
+.paging a:hover{background-color:#FF6600;color:#fff}
+.paging a.prev:hover{background-color:#FF6600;color:#fff;border:1px solid #e6e6e6}
+.paging a.next:hover{background-color:#FF6600;color:#fff;border:1px solid #e6e6e6}
+.paging a{padding:3px 7px}
+.paging .current,.paging span strong{background-color:#FF6600;color:#fff;border:1px solid #e6e6e6;padding:3px 7px}
+.paging .prev{padding-left:12px;color:#FF6600}
+.paging .next{padding-right:12px;color:#FF6600}
+.paging div.disable{display:inline}
+.paging div.disable span.next{background-color:#f9f9f9;padding:3px 12px 3px 5px;color:#cccccc;border:1px solid #e6e6e6}
+.paging div.disable span.prev{background-color:#f9f9f9;padding:3px 5px 3px 12px;color:#cccccc;border:1px solid #e6e6e6}
