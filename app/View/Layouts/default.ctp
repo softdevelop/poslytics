@@ -71,7 +71,7 @@
 			echo $title_page;
 			}?></li>
             
-            <li class="right">
+            <!-- <li class="right">
                 <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
                 <ul class="dropdown-menu pull-right skin-color">
                     <li><a href="default">Default</a></li>
@@ -81,7 +81,7 @@
                     <li><a href="green">Green</a></li>
                     <li><a href="brown">Brown</a></li>
                 </ul>
-            </li>
+            </li> -->
         </ul>
         
         <div class="pageheader">

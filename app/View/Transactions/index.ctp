@@ -1,13 +1,12 @@
-<a href="<?php echo $this->Html->url('add');?>" class="btn btn-primary btn-rounded"> <i class="icon-transaction"></i>Add transaction</a>
-<a href="<?php echo $this->Html->url('upload');?>" class="btn btn-primary btn-rounded"> <i class="icon-transaction"></i>Post link json transaction</a>
+
 <h4 class="widgettitle">Total Transactions</h4>
 <div style="width: 100%; height: 61px;">
 	<div style="float:right;margin-left:38px;">
-	<label>Date start</label>
+	<label>Date Start</label>
 	<span class="field"><input id="datepickerStart" type="text" name="date" class="input-small" /></span>
 	</div>
 	<div style="float:right;">
-	<label>Date end</label>
+	<label>Date End</label>
 	<span class="field"><input id="datepickerEnd" type="text" name="date" class="input-small" /></span>
 	</div>
 </div>
@@ -57,7 +56,7 @@
 				</td>
 				<td>
 					<a href="<?php echo $this->Html->url('/view/'.$row['Transaction']['id']); ?>"><i class=" iconsweets-trashcan2"></i></a>
-					<a href="<?php echo $this->Html->url('/edit/'.$row['Transaction']['id']); ?>"><i class="iconsweets-bag"></i></a>
+					<a href="<?php echo $this->Html->url('/edit/'.$row['Transaction']['id']); ?>"><i class="icon-edit"></i></a>
 					<a href="<?php echo $this->Html->url('/delete/'.$row['Transaction']['id']); ?>"><i class="iconsweets-trashcan"></i></a>
 				</td>
 			</tr>
