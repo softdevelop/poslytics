@@ -3,7 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PosLytics</title>
+<title>PosLytics Web App</title>
+<meta name="description" content="This helps banks understand how business owners their POS devices">
+<meta name="author" content="UI = Abiodun, Backend = Doung, Mobile = Kazzem">
 <?php echo $this->Html->css('style.default'); ?>
 <?php echo $this->Html->css('responsive-tables'); ?>
 <?php echo $this->Html->css('bootstrap-fileupload.min'); ?>
