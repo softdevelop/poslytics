@@ -55,9 +55,9 @@
 				<?php }?>
 				</td>
 				<td>
-					<a href="<?php echo $this->Html->url('/view/'.$row['Transaction']['id']); ?>"><i class=" iconsweets-trashcan2"></i></a>
+					<a href="<?php echo $this->Html->url('/view/'.$row['Transaction']['id']); ?>"><i class=" icon-eye-open"></i></a>
 					<a href="<?php echo $this->Html->url('/edit/'.$row['Transaction']['id']); ?>"><i class="icon-edit"></i></a>
-					<a href="<?php echo $this->Html->url('/delete/'.$row['Transaction']['id']); ?>"><i class="iconsweets-trashcan"></i></a>
+					<a href="<?php echo $this->Html->url('/delete/'.$row['Transaction']['id']); ?>"><i class="icon-trash"></i></a>
 				</td>
 			</tr>
 			<?php }
