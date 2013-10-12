@@ -5,26 +5,26 @@
 	<ul class="headmenu">
 		<li class="odd">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo $this->Html->url('/');?>">
-				<span class="head-icon head-message"></span>
+				<span class="head-icon head-total-pos"></span>
 				<span class="headmenu-label">Total POS</span>
 			</a>
 		</li>
 		<li>
 			<a class="dropdown-toggle" data-toggle="dropdown" data-target="<?php echo $this->Html->url('/');?>">
-			<span class="head-icon head-users"></span>
+			<span class="head-icon head-active"></span>
 			<span class="headmenu-label">Active POS</span>
 			</a>
 		</li>	
 		<li class="odd">
 			<a class="dropdown-toggle" data-toggle="dropdown" data-target="<?php echo $this->Html->url('/');?>">
-			<span class="head-icon head-users"></span>
+			<span class="head-icon head-in-active"></span>
 			<span class="headmenu-label">InActive POS</span>
 			</a>
 			
 		</li>
 		<li>
 			<a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo $this->Html->url('/transactions');?>">
-			<span class="head-icon head-bar"></span>
+			<span class="head-icon head-icon-cart"></span>
 			<span class="headmenu-label">Total Trasaction</span>
 			</a>
 		</li>
