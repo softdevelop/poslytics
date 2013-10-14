@@ -43,7 +43,11 @@
 		</li>
 		<li class="right">
 			<div class="userloggedinfo">
-				<img src="/images/photos/thumb1.png" alt="" />
+				<img src="/images/photos/<?php
+				if($this->Session->read('UserAuth.User.avatar') != '' && file_exists(ROOT.'/app/webroot/images/photos/'.$this->Session->read('UserAuth.User.UserAuth.User.avatar')))
+					echo $this->Session->read('UserAuth.User.avatar');
+				else echo 'thumb1.png';
+				?>" alt="" />
 				<div class="userinfo">
 					<h5><?php echo $this->Session->read('UserAuth.User.last_name')?> <small>- <?php echo $this->Session->read('UserAuth.User.email')?></small></h5>
 					<ul>
