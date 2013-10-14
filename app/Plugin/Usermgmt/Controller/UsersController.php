@@ -310,20 +310,20 @@ class UsersController extends UserMgmtAppController {
 	$userGroups = $this->UserGroup->getGroups();
 	$userId = $this->UserAuth->getUserId();
 	$user = $this->User->find('first',array('conditions'=>array('User.id'=>$userId)));
-	if($user['UserGroup']['id']==1){
-		$userGroups = array('2'=>'Manage');}
-	else{
-		$userGroups = array('3'=>'User');
-	}
+	// if($user['UserGroup']['id']==1){
+		// $userGroups = array('2'=>'Manage');}
+	// else{
+		// $userGroups = array('3'=>'User');
+	// }
 	$this->set('userGroups', $userGroups);
 	if ($this->request->isPost()) {
 	    $this->User->set($this->data);
 	    if ($this->User->RegisterValidate()) {
-		if($user['UserGroup']['id']==1){
-			$this->request->data['User']['user_group_id']=2;}
-		else{
-			$this->request->data['User']['user_group_id']=3;
-		}
+		// if($user['UserGroup']['id']==1){
+			// $this->request->data['User']['user_group_id']=2;}
+		// else{
+			// $this->request->data['User']['user_group_id']=3;
+		// }
 		$this->request->data['User']['email_verified'] = 1;
 		$this->request->data['User']['active'] = 1;
 		$salt = $this->UserAuth->makeSalt();
@@ -383,6 +383,20 @@ class UsersController extends UserMgmtAppController {
 	    if ($this->request->isPut()) {
 		$this->User->set($this->data);
 		if ($this->User->RegisterValidate()) {
+		
+			//avatar
+			if(isset($_FILES["avatar"]) && is_uploaded_file($_FILES["avatar"]["tmp_name"]) && $_FILES["avatar"]["error"] == 0)
+			{
+				$newavatar = time() . '.jpg';
+				if(resizeAvatar($_FILES["avatar"]["tmp_name"], ROOT.'/app/webroot/images/photos/' . $newavatar))
+				{
+					$this->request->data['User']['avatar'] = $newavatar;
+					
+					if($this->Session->read('UserAuth.User.avatar') != '' && file_exists(ROOT.'/app/webroot/images/photos/'.$this->Session->read('UserAuth.User.UserAuth.User.avatar')))
+						unlink(ROOT.'/app/webroot/images/photos/'.$this->Session->read('UserAuth.User.UserAuth.User.avatar'));
+				}
+			}
+			
 		    $this->User->save($this->request->data, false);
 		    $this->Session->setFlash('Account information is updated successfully', 'flash_success');
 		    $this->redirect('/myprofile');
@@ -627,3 +641,51 @@ class UsersController extends UserMgmtAppController {
 
 }
 
+function resizeAvatar($url, $newurl)
+{
+	list($width, $height, $type) = getimagesize($url);
+	if($width == 0 || $height == 0) return false;
+	
+	list($newW, $newH) = array(100, 100);
+	
+	$pg_tempt = imagecreatetruecolor($newW, $newH);
+	$res = false;
+	
+	if($type == 1)
+	{
+		$pg_image = imagecreatefromgif($url);
+		
+		$transparent_index = imagecolortransparent($pg_image);
+		imagepalettecopy($pg_image, $pg_tempt);
+		imagefill($pg_tempt, 0, 0, $transparent_index);
+		imagecolortransparent($pg_tempt, $transparent_index);
+		imagetruecolortopalette($pg_tempt, true, 256);
+		
+		imagecopyresampled($pg_tempt, $pg_image, 0, 0, 0, 0, $newW, $newH, $width, $height);
+		if(imagejpeg($pg_tempt, $newurl, 85)) $res = true;
+		imagedestroy($pg_image);
+	}
+	elseif($type == 2)
+	{
+		$pg_image = imagecreatefromjpeg($url);
+		imagecopyresampled($pg_tempt, $pg_image, 0, 0, 0, 0, $newW, $newH, $width, $height);
+		if(imagejpeg($pg_tempt, $newurl, 85)) $res = true;
+		imagedestroy($pg_image);
+	}
+	elseif($type == 3)
+	{
+		imagealphablending($pg_tempt, false);
+		imagesavealpha($pg_tempt, true);
+		$transparent_index = imagecolorallocatealpha($pg_tempt, 255, 255, 255, 127);
+		imagefilledrectangle($pg_tempt, 0, 0, $newW, $newH, $transparent_index);
+		
+		$pg_image = imagecreatefrompng($url);
+		imagecopyresampled($pg_tempt, $pg_image, 0, 0, 0, 0, $newW, $newH, $width, $height);
+		if(imagejpeg($pg_tempt, $newurl, 85)) $res = true;
+		imagedestroy($pg_image);
+	}
+	else $res = false;
+	
+	imagedestroy($pg_tempt);
+	return $res;
+}
