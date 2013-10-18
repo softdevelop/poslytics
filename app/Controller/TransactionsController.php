@@ -147,6 +147,7 @@ class TransactionsController extends AppController {
         if (!$this->Transaction->exists()) {
             throw new NotFoundException(__('Invalid transaction'));
         }
+		$this->set('title_page','Transaction detail');
         $this->set('transaction', $this->Transaction->read(null, $id));
     }
 
