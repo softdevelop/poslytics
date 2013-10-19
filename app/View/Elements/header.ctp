@@ -44,7 +44,7 @@
 		<li class="right">
 			<div class="userloggedinfo">
 				<img src="/images/photos/<?php
-				if($this->Session->read('UserAuth.User.avatar') != '' && file_exists(ROOT.'/app/webroot/images/photos/'.$this->Session->read('UserAuth.User.UserAuth.User.avatar')))
+				if($this->Session->read('UserAuth.User.avatar') != '' && file_exists(ROOT.'/app/webroot/images/photos/'.$this->Session->read('UserAuth.User.avatar')))
 					echo $this->Session->read('UserAuth.User.avatar');
 				else echo 'thumb1.png';
 				?>" alt="" />
