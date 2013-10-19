@@ -56,8 +56,16 @@
 				</td>
 				<td>
 					<a href="<?php echo $this->Html->url('view/'.$row['Transaction']['id']); ?>"><i class=" icon-eye-open"></i></a>
-					<a href="<?php echo $this->Html->url('edit/'.$row['Transaction']['id']); ?>"><i class="icon-edit"></i></a>
-					<a href="<?php echo $this->Html->url('delete/'.$row['Transaction']['id']); ?>"><i class="icon-trash"></i></a>
+					
+					<?php $userGroupModel = new UserGroup;
+					if ($userGroupModel->isUserGroupAccess('transactions', 'edit', $this->Session->read('UserAuth.User.user_group_id'))) { ?>
+						<a href="<?php echo $this->Html->url('edit/'.$row['Transaction']['id']); ?>"><i class="icon-edit"></i></a>
+					<?php }
+					
+					if ($userGroupModel->isUserGroupAccess('transactions', 'delete', $this->Session->read('UserAuth.User.user_group_id'))) { ?>
+						<a href="<?php echo $this->Html->url('delete/'.$row['Transaction']['id']); ?>"><i class="icon-trash"></i></a>
+					<?php } ?>
+					
 				</td>
 			</tr>
 			<?php }

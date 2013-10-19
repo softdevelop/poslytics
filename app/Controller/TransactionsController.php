@@ -186,7 +186,7 @@ class TransactionsController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Transaction->save($this->request->data)) {
                 $this->Session->setFlash(__('The transaction has been saved'));
-                $this->redirect(array('controller' => 'admin', 'action' => 'index'));
+                $this->redirect('/transactions');
             } else {
                 $this->Session->setFlash(__('The transaction could not be saved. Please, try again.'));
             }
