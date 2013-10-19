@@ -258,6 +258,48 @@ class TransactionsController extends AppController {
             $this->set('_serialize', 'data');
         }
     }
+	
+	public function export()
+	{
+		if(isset($_POST['tranid']) && is_array($_POST['tranid']) && isset($_POST['export']))
+		{
+			$ids = array();
+			foreach($_POST['tranid'] as $key=>$value)
+			{
+				$ids[] = intval($key);
+			}
+			
+			if(count($ids))
+			{
+				$this->Transaction->recursive = 0;
+				$results = $this->Transaction->find('all', array('conditions' => array( "Transaction.id" => $ids )) );
+				
+				if($_POST['export'] == 'EXCEL')
+				{
+					export_xls(data_to_html($results));
+					exit(0);
+				}
+				elseif($_POST['export'] == 'CSV')
+				{
+					export_csv($results);
+					exit(0);
+				}
+				elseif($_POST['export'] == 'PDF')
+				{
+					export_pdf(data_to_html($results));
+					exit(0);
+				}
+				elseif($_POST['export'] == 'WORD')
+				{
+					export_doc(data_to_html($results));
+					exit(0);
+				}
+			}
+		}
+		
+		$this->redirect('/transactions');
+	}
+
 }
 
     function formatData(&$data, $key) {
@@ -265,3 +307,166 @@ class TransactionsController extends AppController {
             $data = strftime('%Y-%m-%d %H:%M:%S', strtotime($data));
         }
     }
+
+
+function export_xls($html)
+{
+	$filename = "export_".date("Y.m.d").".xls";
+	
+    header("Content-type: application//vnd.ms-excel; charset=UTF-8");
+	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+	header("Expires: Sat, 19 Oct 2013 00:00:00 GMT"); // Date in the past - so must always re-read
+	header("content-disposition: attachment;filename=$filename"); //this will be the name of the file the user downloads
+	echo $html;
+}
+
+/*
+function export_xls($results)
+{
+	$filename = "export_".date("Y.m.d");
+	
+	require_once(APP . 'Vendor' . DS . 'xls.php');
+	
+	$xls = new xlsHelper();
+	
+	$xls->setHeader($filename);
+
+	$xls->addXmlHeader();
+	$xls->setWorkSheetName('Transactions');
+
+	//1st row for columns name
+	$xls->openRow();
+	$xls->writeString('<th>TERMINALID');
+	$xls->writeString('LOCATION');
+	$xls->writeString('MERCHANTINFO');
+	$xls->writeString('AMOUNT');
+	$xls->writeString('TRANSTYPE');
+	$xls->writeString('TIMESTAMP');
+	$xls->writeString('RESPONSE');
+	$xls->closeRow();
+
+	//rows for data
+	foreach ($results as $result):
+	$xls->openRow();
+	$xls->writeString($result['Transaction']['terminalid']);
+	$xls->writeString($result['Transaction']['countrycode']);
+	$xls->writeString($result['Transaction']['merchantinfo']);
+	$xls->writeString($result['Transaction']['amount']);
+	$xls->writeString($result['Transaction']['transtype']);
+	$xls->writeString($result['Transaction']['timestamp']);
+	$xls->writeString($result['Transaction']['responsecode']);
+	$xls->closeRow();
+	endforeach;
+	
+	$xls->addXmlFooter();
+}
+*/
+
+function export_csv($results)
+{
+	$filename = "export_".date("Y.m.d").".csv";
+	$csv_file = fopen('php://output', 'w');
+
+	header('Content-type: application/csv');
+	header('Content-Disposition: attachment; filename="'.$filename.'"');
+
+	$header_row = array("TERMINALID", "LOCATION", "MERCHANTINFO", "AMOUNT", "TRANSTYPE", "TIMESTAMP", "RESPONSE");
+	fputcsv($csv_file,$header_row,',','"');
+	
+	foreach($results as $result)
+	{
+		$row = array(
+			$result['Transaction']['terminalid'],
+			$result['Transaction']['countrycode'],
+			$result['Transaction']['merchantinfo'],
+			$result['Transaction']['amount'],
+			$result['Transaction']['transtype'],
+			$result['Transaction']['timestamp'],
+			$result['Transaction']['responsecode']
+		);
+
+		fputcsv($csv_file,$row,',','"');
+	}
+
+	fclose($csv_file);
+}
+
+function export_pdf($html)
+{
+	$filename = "export_".date("Y.m.d").".pdf";
+	
+	require_once(APP . 'Vendor' . DS . 'dompdf' . DS . 'dompdf_config.inc.php');
+	spl_autoload_register('DOMPDF_autoload');
+	$dompdf = new DOMPDF();
+	$dompdf->set_paper = 'A4';
+	$dompdf->load_html($html);
+	$dompdf->render();
+	$dompdf->stream($filename);
+}
+
+function export_doc($html)
+{
+	$filename = "export_".date("Y.m.d").".doc";
+	
+	header("Content-Type: application/vnd.ms-word; charset=UTF-8");
+	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+	header("Expires: Sat, 19 Oct 2013 00:00:00 GMT"); // Date in the past - so must always re-read
+	header("content-disposition: attachment;filename=$filename"); //this will be the name of the file the user downloads
+	echo $html;
+}
+
+function data_to_html($results)
+{
+	$html = '<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Transactions</title>
+	<style type="text/css">
+		body {
+			font-size: 14px;
+			font-family: Arial, Helvetica, sans-serif;
+			padding: 3em;
+		}
+		
+		@page {
+			margin: 0;
+		}
+		
+		table th {
+			text-align:left;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>TERMINALID</th>
+			<th>LOCATION</th>
+			<th>MERCHANTINFO</th>
+			<th>AMOUNT</th>
+			<th>TRANSTYPE</th>
+			<th>TIMESTAMP</th>
+			<th>RESPONSE</th>
+		</tr>';
+
+foreach($results as $result)
+{
+	$html .= '
+		<tr>
+			<td>'.$result['Transaction']['terminalid'].'</td>
+			<td>'.$result['Transaction']['countrycode'].'</td>
+			<td>'.$result['Transaction']['merchantinfo'].'</td>
+			<td>'.$result['Transaction']['amount'].'</td>
+			<td>'.$result['Transaction']['transtype'].'</td>
+			<td>'.$result['Transaction']['timestamp'].'</td>
+			<td>'.$result['Transaction']['responsecode'].'</td>
+		</tr>';
+}
+
+$html .= '
+	</table>
+</body>
+</html>';
+
+	return $html;
+}

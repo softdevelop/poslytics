@@ -1,5 +1,6 @@
 
 <h4 class="widgettitle">Total Transactions</h4>
+<?php echo $this->Form->create('Transaction', array('action' => 'export')); ?>
 <div style="width: 100%; height: 61px;">
 	<div style="float:right;margin-left:38px;">
 	<label>Date Start</label>
@@ -8,6 +9,14 @@
 	<div style="float:right;">
 	<label>Date End</label>
 	<span class="field"><input id="datepickerEnd" type="text" name="date" class="input-small" /></span>
+	</div>
+	
+	<div style="float:left;">
+		<label>Export selected items to:</label>
+		<input class="btn btn-primary" type="submit" name="export" value="EXCEL">
+		<input class="btn btn-primary" type="submit" name="export" value="CSV">
+		<input class="btn btn-primary" type="submit" name="export" value="PDF">
+		<input class="btn btn-primary" type="submit" name="export" value="WORD">
 	</div>
 </div>
 	<table class="table table-bordered table-infinite" id="dyntable2">
@@ -40,7 +49,7 @@
 		?>
 			<tr class="gradeX">
 				<td class="aligncenter"><span class="center">
-                            <input type="checkbox" />
+                            <input type="checkbox" name="tranid[<?php echo $row['Transaction']['id']; ?>]" value="1"/>
                           </span></td>
 				<td><?php echo h($row['Transaction']['terminalid']);?></td>
 				<td><?php echo h($row['Transaction']['countrycode']);?></td>
@@ -74,6 +83,9 @@
 						} ?>
 		</tbody>
 	</table>
+	
+<?php echo $this->Form->end(); ?>
+
 <script type="text/javascript">
 jQuery(document).ready(function(){
 	jQuery("#datepickerStart").datepicker();
