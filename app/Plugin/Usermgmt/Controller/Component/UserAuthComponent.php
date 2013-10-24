@@ -88,11 +88,11 @@ class UserAuthComponent extends Component {
 		    $c->redirect('/login');
 		}
 	    } else {
-		if (!$userGroupModel->isUserGroupAccess($controller, $action, $this->getGroupId())) {
-		    $c->log('permission: actionUrl-' . $actionUrl, LOG_DEBUG);
-		    $c->Session->write('permission_error_redirect', '/users/login');
-		    $c->redirect('/accessDenied');
-		}
+			if (!$userGroupModel->isUserGroupAccess($controller, $action, $this->getGroupId())) {
+				$c->log('permission: actionUrl-' . $actionUrl, LOG_DEBUG);
+				$c->Session->write('permission_error_redirect', '/users/login');
+				$c->redirect('/accessDenied');
+			}
 	    }
 	}
     }

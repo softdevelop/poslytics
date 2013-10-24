@@ -1,6 +1,6 @@
-<?php echo $this->Form->create('User', array('action' => 'addUser')); ?>
+<?php echo $this->Form->create('User', array('action' => 'editUser')); ?>
 <div class="widgetbox personal-information">
-	<h4 class="widgettitle">Add User</h4>
+	<h4 class="widgettitle">Edit User</h4>
 	<div class="widgetcontent">
 		<p>
 			<label>Group:</label>
@@ -19,9 +19,14 @@
 			<label>Email:</label>
 			<?php echo $this->Form->input("email" ,array('label' => false,'div' => false,'class'=>"input-xlarge" ))?>
 		</p>
+		<p>
+			<label>Freeze this user:</label>
+			<?php echo $this->Form->input("active" ,array('type' => 'select', 'options' => array('1' => 'No', '0' => 'Yes'), 'default' => '1', 'label' => false,'div' => false,'class'=>"input-xlarge" ))?>
+		
+		</p>
 	</div>
 </div>
 <p>
-<?php echo $this->Form->Submit(__('Add User'), array('div'=>false, 'class'=>'btn btn-primary'));?>
+<?php echo $this->Form->Submit(__('Save Changes'), array('div'=>false, 'class'=>'btn btn-primary'));?>
 </p>
 <?php echo $this->Form->end(); ?>

@@ -349,28 +349,34 @@ class UsersController extends UserMgmtAppController {
      * @return void
      */
     public function editUser($userId = null) {
-	$this->set('title_page','Edit users');
-	if (!empty($userId)) {
-	    $userGroups = $this->UserGroup->getGroups();
+		$this->set('title_page','Edit users');
+		
+		$this->User->id = $userId;
+		if (!$this->User->exists()) {
+			$this->redirect('/allUsers');
+		}
+		
+		$userGroups = $this->UserGroup->getGroups();
 	    $this->set('userGroups', $userGroups);
-	    if ($this->request->isPut()) {
-		$this->User->set($this->data);
-		if ($this->User->RegisterValidate()) {
-		    $this->User->save($this->request->data, false);
-		    $this->Session->setFlash('User account information is updated successfully', 'flash_success');
-		    $this->redirect('/allUsers');
+		
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->User->set($this->data);
+			if ($this->User->RegisterValidate()) {
+				if ($this->User->save($this->request->data)) {
+					$this->Session->setFlash('User account information is updated successfully', 'flash_success');
+					$this->redirect('/allUsers');
+				} else {
+					$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				}
+			}
+		} else {
+			$user = $this->User->read(null, $userId);
+			$this->request->data = null;
+			if (!empty($user)) {
+				$user['User']['password'] = '';
+				$this->request->data = $user;
+			}
 		}
-	    } else {
-		$user = $this->User->read(null, $userId);
-		$this->request->data = null;
-		if (!empty($user)) {
-		    $user['User']['password'] = '';
-		    $this->request->data = $user;
-		}
-	    }
-	} else {
-	    $this->redirect('/allUsers');
-	}
     }
 
     public function editMyprofile($userId = null) {
