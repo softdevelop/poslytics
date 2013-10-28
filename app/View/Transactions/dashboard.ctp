@@ -1,3 +1,4 @@
+<?php $this->Html->addCrumb('Transactions', '/'); ?>
 <div id="totalpos">
 	<h3 style="padding:10px 0;">Total POS</h3>
 	<div id="plot_totalpos" style="height:300px;"></div>

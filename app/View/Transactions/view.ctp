@@ -1,3 +1,4 @@
+<?php $this->Html->addCrumb('Transactions', '/'); ?>
 <div class="widgetbox box-inverse">
 	<h4 class="widgettitle">Transaction detail</h4>
 	<div class="widgetcontent wc1">

@@ -1,3 +1,4 @@
+<?php $this->Html->addCrumb('Transactions', '/'); ?>
 <?php echo $this->Form->create('Transaction', array('action' => 'add')); ?>
 <div class="widgetbox box-inverse">
 	<h4 class="widgettitle">Add new transaction</h4>

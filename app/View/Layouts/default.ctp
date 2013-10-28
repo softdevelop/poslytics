@@ -63,17 +63,32 @@
     </div><!-- leftpanel -->
     
     <div class="rightpanel">
-        
-        <ul class="breadcrumbs">
-            <li><a href="#"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
-            <li><a href="#">Tables</a> <span class="separator"></span></li>
-            <li><?php if(!isset($title_page)){
-			echo __('PosLytics');
-			}else{
-			echo $title_page;
-			}?></li>
-            
-            <!-- <li class="right">
+        <?php if(isset($title_page)){
+			$this->Html->addCrumb($title_page);
+		}?>
+		<ul class="breadcrumbs"><li>
+		<?php /* echo $this->Html->getCrumbList(
+			array(	'class'=>'breadcrumbs',
+					'separator'=>' <span class="separator"></span>'
+				),
+			array(
+				'text' => '<i class="iconfa-home"></i></a> <span class="separator"></span>',
+				'url' => array('controller' => 'transactions', 'action' => 'dashboard'),
+				'escape' => false
+				)
+			); */
+			
+			echo $this->Html->getCrumbs( ' <span class="separator"></span></li><li>',
+				array(
+					'text' => '<i class="iconfa-home"></i></a>',
+					'url' => array('controller' => 'transactions', 'action' => 'dashboard'),
+					'escape' => false
+					)
+			);
+			?>
+			
+        <!-- <ul class="breadcrumbs">
+			<li class="right">
                 <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
                 <ul class="dropdown-menu pull-right skin-color">
                     <li><a href="default">Default</a></li>
@@ -83,9 +98,10 @@
                     <li><a href="green">Green</a></li>
                     <li><a href="brown">Brown</a></li>
                 </ul>
-            </li> -->
-        </ul>
-        
+            </li>
+        </ul> -->
+        </li></ul>
+		
         <div class="pageheader">
             <div class="pageicon"><span class="iconfa-table"></span></div>
             <div class="pagetitle">
