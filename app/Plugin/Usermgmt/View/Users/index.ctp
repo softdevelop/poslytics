@@ -40,9 +40,22 @@ if($this->Session->read('UserAuth.UserGroup.id')==1){?>
 				<td><?php echo h($row['User']['created']);?></td>
 				<td>
 					<a href="<?php echo $this->Html->url('/viewUser/'.$row['User']['id']); ?>"><i class=" iconsweets-trashcan2"></i></a>
-					<a href="<?php echo $this->Html->url('/editUser/'.$row['User']['id']); ?>"><i class="iconsweets-bag"></i></a>
-					<a href="<?php echo $this->Html->url('/changeUserPassword/'.$row['User']['id']); ?>"><i class="iconsweets-abacus"></i></a>
-					<a href="<?php echo $this->Html->url('/deleteUser/'.$row['User']['id']); ?>"><i class="iconsweets-trashcan"></i></a>
+					
+					<?php $userGroupModel = new UserGroup;
+					if ($userGroupModel->isUserGroupAccess('Users', 'editUser', $this->Session->read('UserAuth.User.user_group_id'))) { ?>
+						<a href="<?php echo $this->Html->url('/editUser/'.$row['User']['id']); ?>"><i class="iconsweets-bag"></i></a>
+					<?php }
+					
+					$userGroupModel = new UserGroup;
+					if ($userGroupModel->isUserGroupAccess('Users', 'changeUserPassword', $this->Session->read('UserAuth.User.user_group_id'))) { ?>
+						<a href="<?php echo $this->Html->url('/changeUserPassword/'.$row['User']['id']); ?>"><i class="iconsweets-abacus"></i></a>
+					<?php }
+					
+					$userGroupModel = new UserGroup;
+					if ($userGroupModel->isUserGroupAccess('Users', 'deleteUser', $this->Session->read('UserAuth.User.user_group_id'))) { ?>
+						<a href="<?php echo $this->Html->url('/deleteUser/'.$row['User']['id']); ?>"><i class="iconsweets-trashcan"></i></a>
+					<?php }
+					?>
 				</td>
 			</tr>
 			<?php }
